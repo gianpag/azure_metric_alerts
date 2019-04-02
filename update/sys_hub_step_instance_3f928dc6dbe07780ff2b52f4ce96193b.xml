@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_hub_step_instance">
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Create Azure  Alert Rules v2">ea924dc6dbe07780ff2b52f4ce96193e</action>
+        <cid>29ba02a0-2261-4567-bedc-39695a46763e</cid>
+        <extended_inputs/>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>prepare Alert Rule JSON Payload</label>
+        <order>1</order>
+        <outputs/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_class_name>sys_hub_step_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:36</sys_created_on>
+        <sys_id>3f928dc6dbe07780ff2b52f4ce96193b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>prepare Alert Rule JSON Payload</sys_name>
+        <sys_package display_value="GP_Azure_Flows" source="x_snc_gp_azure_flo">78110d06dbe07780ff2b52f4ce96198d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="GP_Azure_Flows">78110d06dbe07780ff2b52f4ce96198d</sys_scope>
+        <sys_update_name>sys_hub_step_instance_3f928dc6dbe07780ff2b52f4ce96193b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=3f928dc6dbe07780ff2b52f4ce96193b"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>3f928dc6dbe07780ff2b52f4ce96193b</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:38</sys_created_on>
+        <sys_id>0ca28dc6dbe07780ff2b52f4ce9619a6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>3f928dc6dbe07780ff2b52f4ce96193b</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:38</sys_created_on>
+        <sys_id>cca28dc6dbe07780ff2b52f4ce9619a6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+  	if (inputs.azure_ObjectId.length &gt; 1){
+    	var CreationCriteria = "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria";
+    } else {
+       	var CreationCriteria = "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria";
+    }
+	var aRule_payload = {
+        location: "global",
+        tags: {},
+        properties: {
+          description: inputs.aRule_desc ,
+          severity: inputs.aRule_descaRule_Severity,
+          enabled: inputs.aRule_Enabled,
+          scopes: inputs.azure_ObjectId,
+          evaluationFrequency: inputs.aRule_EvalFreq,
+          windowSize: inputs.aRule_EvalWindowSize,
+          targetResourceType: inputs.targetResourceType, //THIS MUST BE PASSED AS A PARAMETER
+    	  targetResourceRegion: inputs.targetResourceRegion, //THIS MUST BE PASSED AS A PARAMETER
+          criteria: {
+            "odata.type": CreationCriteria,
+            allOf: [
+            ]
+          },
+          autoMitigate: false,
+          actions: [
+            {
+              actionGroupId: inputs.aRule_Action,
+              webhookProperties: {
+              }
+            }
+          ]
+        }
+      };
+  
+  	// SAMPLE metric section, list_item for the 'allOf' key
+    var sample_metric = {
+      "criterionType": "StaticThresholdCriterion",
+      "name": "GPZTEST_High_CPU_80",
+      "metricName": "Percentage CPU",
+      "metricNamespace": "microsoft.compute/virtualmachines",
+      "dimensions": [],
+      "operator": "GreaterThan",
+      "threshold": 80.5,
+      "timeAggregation": "Average"
+    };
+  	gs.info("ThreshSetter Create AlertRule [METRIC1]: " + JSON.stringify(inputs.aRule_MetricCriteria1));
+  	gs.info("ThreshSetter Create AlertRule [SAMPLE METRIC1]: " + JSON.stringify(sample_metric));
+     
+	aRule_payload.properties.criteria.allOf.push(inputs.aRule_MetricCriteria1);
+    /* NEED TO PUSH THIS into allOf
+    {
+              criterionType: "StaticThresholdCriterion", // This needs to be created dynamically, let's check with Anders what the UI script passes
+              metricNamespace: "microsoft.compute/virtualmachines"
+            }*/
+  	//aRule_payload.properties.criteria.allOf.push(JSON.stringify(sample_metric));    
+    if (inputs.aRule_MetricCriteria2) {
+      aRule_payload.properties.criteria.allOf.push(JSON.parse(inputs.aRule_MetricCriteria2));
+    }
+    
+    
+    
+  
+  outputs.request_Payload = JSON.stringify(aRule_payload);
+})(inputs, outputs);
+</value>
+        <variable display_value="">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=3f928dc6dbe07780ff2b52f4ce96193b"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>application</field>
+        <id>3f928dc6dbe07780ff2b52f4ce96193b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:38</sys_created_on>
+        <sys_id>c4a28dc6dbe07780ff2b52f4ce9619a6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aRule_Action</field>
+        <id>3f928dc6dbe07780ff2b52f4ce96193b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:38</sys_created_on>
+        <sys_id>0ca28dc6dbe07780ff2b52f4ce9619a7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_3f928dc6dbe07780ff2b52f4ce96193b</table>
+        <value>{{action.alert_rule_action}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aRule_desc</field>
+        <id>3f928dc6dbe07780ff2b52f4ce96193b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:38</sys_created_on>
+        <sys_id>c8a28dc6dbe07780ff2b52f4ce9619a8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_3f928dc6dbe07780ff2b52f4ce96193b</table>
+        <value>{{action.rule_description}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aRule_Enabled</field>
+        <id>3f928dc6dbe07780ff2b52f4ce96193b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:38</sys_created_on>
+        <sys_id>cca28dc6dbe07780ff2b52f4ce9619a7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_3f928dc6dbe07780ff2b52f4ce96193b</table>
+        <value>{{action.enable_rule_on_creation}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aRule_EvalFreq</field>
+        <id>3f928dc6dbe07780ff2b52f4ce96193b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:38</sys_created_on>
+        <sys_id>48a28dc6dbe07780ff2b52f4ce9619a7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_3f928dc6dbe07780ff2b52f4ce96193b</table>
+        <value>{{action.evaluation_frequency}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aRule_EvalWindowSize</field>
+        <id>3f928dc6dbe07780ff2b52f4ce96193b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:38</sys_created_on>
+        <sys_id>8ca28dc6dbe07780ff2b52f4ce9619a8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_3f928dc6dbe07780ff2b52f4ce96193b</table>
+        <value>{{action.evaluation_window_size}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aRule_MetricCriteria1</field>
+        <id>3f928dc6dbe07780ff2b52f4ce96193b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:38</sys_created_on>
+        <sys_id>40a28dc6dbe07780ff2b52f4ce9619a9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_3f928dc6dbe07780ff2b52f4ce96193b</table>
+        <value>{{action.metric_1_criterias}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aRule_MetricCriteria2</field>
+        <id>3f928dc6dbe07780ff2b52f4ce96193b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:38</sys_created_on>
+        <sys_id>04a28dc6dbe07780ff2b52f4ce9619a9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_3f928dc6dbe07780ff2b52f4ce96193b</table>
+        <value>{{action.metric_2_criterias}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aRule_Severity</field>
+        <id>3f928dc6dbe07780ff2b52f4ce96193b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:38</sys_created_on>
+        <sys_id>44a28dc6dbe07780ff2b52f4ce9619a8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_3f928dc6dbe07780ff2b52f4ce96193b</table>
+        <value>{{action.alert_severity}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>azure_ObjectId</field>
+        <id>3f928dc6dbe07780ff2b52f4ce96193b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:38</sys_created_on>
+        <sys_id>80a28dc6dbe07780ff2b52f4ce9619a8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_3f928dc6dbe07780ff2b52f4ce96193b</table>
+        <value>{{action.object_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>script</field>
+        <id>3f928dc6dbe07780ff2b52f4ce96193b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:38</sys_created_on>
+        <sys_id>88a28dc6dbe07780ff2b52f4ce9619a6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>targetResourceRegion</field>
+        <id>3f928dc6dbe07780ff2b52f4ce96193b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:38</sys_created_on>
+        <sys_id>08a28dc6dbe07780ff2b52f4ce9619a8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_3f928dc6dbe07780ff2b52f4ce96193b</table>
+        <value>{{action.targetresourceregion}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>targetResourceType</field>
+        <id>3f928dc6dbe07780ff2b52f4ce96193b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:38</sys_created_on>
+        <sys_id>c4a28dc6dbe07780ff2b52f4ce9619a9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:38</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_3f928dc6dbe07780ff2b52f4ce96193b</table>
+        <value>{{action.targetresourcetype16}}</value>
+    </sys_element_mapping>
+</record_update>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_hub_action_type_definition">
+    <sys_hub_action_type_definition action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <annotation/>
+        <category/>
+        <copied_from>58d0b80edb34af00ff2b52f4ce9619c2</copied_from>
+        <copied_from_name>Create Azure Alert Rules</copied_from_name>
+        <description/>
+        <internal_name>create_azure__alert_rules_v2</internal_name>
+        <label_cache>[{"name":"{{action.bearer}}","label":"action➛bearer","type":"action","ref":""},{"name":"{{action.subscription_id}}","label":"action➛subscription_id","type":"action","ref":""},{"name":"{{action.resource_group_name}}","label":"action➛resource_group_name","type":"action","ref":""},{"name":"{{action.populate_table}}","label":"action➛Populate Table","type":"action","ref":""},{"name":"{{action.rule_name}}","label":"action➛Rule Name","type":"action","ref":""},{"name":"{{action.rule_description}}","label":"action➛Rule Description","type":"action","ref":""},{"name":"{{action.alert_severity}}","label":"action➛Alert Severity","type":"action","ref":""},{"name":"{{action.enable_rule_on_creation}}","label":"action➛Enable rule on creation","type":"action","ref":""},{"name":"{{action.object_id}}","label":"action➛Object id","type":"action","ref":""},{"name":"{{action.evaluation_frequency}}","label":"action➛Evaluation Frequency","type":"action","ref":""},{"name":"{{action.evaluation_window_size}}","label":"action➛Evaluation Window Size","type":"action","ref":""},{"name":"{{action.alert_rule_action}}","label":"action➛Alert Rule Action","type":"action","ref":""},{"name":"{{action.metric_2_criterias}}","label":"action➛Metric 2 Criterias","type":"action","ref":""},{"name":"{{action.metric_1_criterias}}","label":"action➛Metric 1 Criterias","type":"action","ref":""},{"name":"{{action.targetresourceregion}}","label":"action➛TargetResourceRegion","type":"action","ref":""},{"name":"{{action.targetresourcetype16}}","label":"action➛TargetResourceType","type":"action","ref":""},{"name":"{{step[ab1213ed-d243-4408-988f-a15549ae8f15].response_body}}","label":"step➛create Alert Rule➛Response Body","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].a}}","label":"step➛add Alert to Definition Table➛a","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].al}}","label":"step➛add Alert to Definition Table➛al","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].ale}}","label":"step➛add Alert to Definition Table➛ale","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].aler}}","label":"step➛add Alert to Definition Table➛aler","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].alert}}","label":"step➛add Alert to Definition Table➛alert","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].alertR}}","label":"step➛add Alert to Definition Table➛alertR","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].alertRu}}","label":"step➛add Alert to Definition Table➛alertRu","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].alertRul}}","label":"step➛add Alert to Definition Table➛alertRul","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].alertRule}}","label":"step➛add Alert to Definition Table➛alertRule","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].alertRules}}","label":"step➛add Alert to Definition Table➛alertRules","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].temp_test_list}}","label":"step➛add Alert to Definition Table➛temp_test_list","type":"step","ref":""},{"name":"{{step[29ba02a0-2261-4567-bedc-39695a46763e].request_Payload}}","label":"step➛prepare Alert Rule JSON Payload➛request_Payload","type":"step","ref":""},{"name":"{{step[ab1213ed-d243-4408-988f-a15549ae8f15].status_code}}","label":"step➛create Alert Rule➛Status Code","type":"step","ref":""}]</label_cache>
+        <latest_snapshot/>
+        <master_snapshot/>
+        <name>Create Azure  Alert Rules v2</name>
+        <outputs/>
+        <outputs/>
+        <state>draft</state>
+        <sys_class_name>sys_hub_action_type_definition</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:32</sys_created_on>
+        <sys_id>ea924dc6dbe07780ff2b52f4ce96193e</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Create Azure  Alert Rules v2</sys_name>
+        <sys_package display_value="GP_Azure_Flows" source="x_snc_gp_azure_flo">78110d06dbe07780ff2b52f4ce96198d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="GP_Azure_Flows">78110d06dbe07780ff2b52f4ce96198d</sys_scope>
+        <sys_update_name>sys_hub_action_type_definition_ea924dc6dbe07780ff2b52f4ce96193e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:44</sys_updated_on>
+        <system_level>false</system_level>
+        <type/>
+    </sys_hub_action_type_definition>
+    <sys_translated_text action="delete_multiple" query="documentkey=ea924dc6dbe07780ff2b52f4ce96193e"/>
+    <sys_variable_value action="delete_multiple" query="document_key=ea924dc6dbe07780ff2b52f4ce96193e"/>
+    <sys_element_mapping action="delete_multiple" query="id=ea924dc6dbe07780ff2b52f4ce96193e"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>alerts</field>
+        <id>ea924dc6dbe07780ff2b52f4ce96193e</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:44</sys_created_on>
+        <sys_id>a5a2cdc6dbe07780ff2b52f4ce9619c8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:44</sys_updated_on>
+        <table>var__m_sys_hub_action_output_ea924dc6dbe07780ff2b52f4ce96193e</table>
+        <value>{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].alertRules}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>temptest</field>
+        <id>ea924dc6dbe07780ff2b52f4ce96193e</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:17:44</sys_created_on>
+        <sys_id>69a2cdc6dbe07780ff2b52f4ce9619c8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:17:44</sys_updated_on>
+        <table>var__m_sys_hub_action_output_ea924dc6dbe07780ff2b52f4ce96193e</table>
+        <value>{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].temp_test_list}}</value>
+    </sys_element_mapping>
+</record_update>

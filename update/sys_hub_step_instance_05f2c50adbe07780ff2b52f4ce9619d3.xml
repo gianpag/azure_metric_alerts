@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_hub_step_instance">
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Get Azure Action Groups">80f2850adbe07780ff2b52f4ce9619c8</action>
+        <cid>636eb32b-5a1c-45e6-b975-aef8c0c2aec9</cid>
+        <extended_inputs/>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>extract Action Group Name and Id</label>
+        <order>2</order>
+        <outputs/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_class_name>sys_hub_step_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:19:04</sys_created_on>
+        <sys_id>05f2c50adbe07780ff2b52f4ce9619d3</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>extract Action Group Name and Id</sys_name>
+        <sys_package display_value="GP_Azure_Flows" source="x_snc_gp_azure_flo">78110d06dbe07780ff2b52f4ce96198d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="GP_Azure_Flows">78110d06dbe07780ff2b52f4ce96198d</sys_scope>
+        <sys_update_name>sys_hub_step_instance_05f2c50adbe07780ff2b52f4ce9619d3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:19:05</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=05f2c50adbe07780ff2b52f4ce9619d3"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>05f2c50adbe07780ff2b52f4ce9619d3</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:19:05</sys_created_on>
+        <sys_id>11f2c50adbe07780ff2b52f4ce9619f0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:19:05</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+  actionGroups = JSON.parse(decodeURI(inputs.actionGroupRespBody));
+  var temp_test_list = []; //to remove
+
+  var id = '';
+  var action_group_name = '';
+  var action_groups = [];
+
+  for (var i = 0, len = actionGroups.length; i &lt; len; ++i) {
+    var valueToPush = new Array();
+    valueToPush[0] = actionGroups[i].id;
+    valueToPush[1] = actionGroups[i].name;
+	action_groups.push(valueToPush);
+    temp_test_list.push('id: ' + valueToPush[0] + ' name: ' + valueToPush[1] + ' ***** ');
+  }
+  outputs.actionGroups = JSON.stringify(action_groups);
+  outputs.temp_test_list = JSON.stringify(temp_test_list);
+
+})(inputs, outputs);
+</value>
+        <variable display_value="">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>05f2c50adbe07780ff2b52f4ce9619d3</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:19:05</sys_created_on>
+        <sys_id>5df2c50adbe07780ff2b52f4ce9619ef</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:19:05</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=05f2c50adbe07780ff2b52f4ce9619d3"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>actionGroupRespBody</field>
+        <id>05f2c50adbe07780ff2b52f4ce9619d3</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:19:05</sys_created_on>
+        <sys_id>99f2c50adbe07780ff2b52f4ce9619f0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:19:05</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_05f2c50adbe07780ff2b52f4ce9619d3</table>
+        <value>{{step[ab1213ed-d243-4408-988f-a15549ae8f15].response_body}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>application</field>
+        <id>05f2c50adbe07780ff2b52f4ce9619d3</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:19:05</sys_created_on>
+        <sys_id>19f2c50adbe07780ff2b52f4ce9619ef</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:19:05</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>script</field>
+        <id>05f2c50adbe07780ff2b52f4ce9619d3</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:19:05</sys_created_on>
+        <sys_id>d9f2c50adbe07780ff2b52f4ce9619ef</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:19:05</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+</record_update>

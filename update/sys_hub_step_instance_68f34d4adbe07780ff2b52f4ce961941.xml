@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_hub_step_instance">
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Get Azure Metric Definitions">a7e30d4adbe07780ff2b52f4ce961957</action>
+        <cid>02718a6f-5802-483b-b4ff-cbddfab78c8d</cid>
+        <extended_inputs/>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Script step</label>
+        <order>2</order>
+        <outputs/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_class_name>sys_hub_step_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:23:24</sys_created_on>
+        <sys_id>68f34d4adbe07780ff2b52f4ce961941</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Script step</sys_name>
+        <sys_package display_value="GP_Azure_Flows" source="x_snc_gp_azure_flo">78110d06dbe07780ff2b52f4ce96198d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="GP_Azure_Flows">78110d06dbe07780ff2b52f4ce96198d</sys_scope>
+        <sys_update_name>sys_hub_step_instance_68f34d4adbe07780ff2b52f4ce961941</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:23:25</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=68f34d4adbe07780ff2b52f4ce961941"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>68f34d4adbe07780ff2b52f4ce961941</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:23:25</sys_created_on>
+        <sys_id>b4f34d4adbe07780ff2b52f4ce96196b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:23:25</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+// ... code ...
+  
+  metricDefinitions = JSON.parse(inputs.metricDefRespBody).value;
+  var temp_test_list = []; //to remove
+  var unit = '';
+  var metricName = '';
+  var metricDisplayName = '';
+  var metricAggregationType = '';
+  var metricNamespace = '';
+  for (var i = 0, len = metricDefinitions.length; i &lt; len; ++i) {
+    unit = metricDefinitions[i].unit;
+    metricAggregationType = metricDefinitions[i].primaryAggregationType;
+    metricName = metricDefinitions[i].name.value;
+    metricDisplayName = metricDefinitions[i].name.localizedValue;
+    metricNamespace = metricDefinitions[i].namespace;
+    
+    if (inputs.populate_table_switch){
+      var checkDup = new GlideRecord ( "x_snc_threshsetter_azure_alert_metric_def" );
+      checkDup.addQuery('name',metricName);
+      checkDup.addQuery('namespace',metricNamespace);
+      checkDup.query();
+
+      if (!checkDup.hasNext()) {
+        var metricDef = new GlideRecord ( "x_snc_threshsetter_azure_alert_metric_def" );
+        metricDef.initialize(); 
+        metricDef.name = metricName; 
+        metricDef.metric_name = metricDisplayName;
+        metricDef.unit = unit; 
+        metricDef.namespace = metricNamespace; 
+        metricDef.aggregation_type = metricAggregationType;
+        metricDef.insert();
+      }
+    }
+    temp_test_list.push(metricName + ' ' + metricDisplayName + ' ' + unit + ' ' + metricNamespace + ' ' + metricAggregationType);
+  }
+  outputs.Azure_metrics = JSON.stringify(metricDefinitions);
+ 
+})(inputs, outputs);
+</value>
+        <variable display_value="">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>68f34d4adbe07780ff2b52f4ce961941</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:23:25</sys_created_on>
+        <sys_id>f0f34d4adbe07780ff2b52f4ce96196b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:23:25</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=68f34d4adbe07780ff2b52f4ce961941"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>application</field>
+        <id>68f34d4adbe07780ff2b52f4ce961941</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:23:25</sys_created_on>
+        <sys_id>bcf34d4adbe07780ff2b52f4ce96196a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:23:25</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>metricDefRespBody</field>
+        <id>68f34d4adbe07780ff2b52f4ce961941</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:23:25</sys_created_on>
+        <sys_id>f0f34d4adbe07780ff2b52f4ce96196c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:23:25</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_68f34d4adbe07780ff2b52f4ce961941</table>
+        <value>{{step[ab1213ed-d243-4408-988f-a15549ae8f15].response_body}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>populate_table_switch</field>
+        <id>68f34d4adbe07780ff2b52f4ce961941</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:23:25</sys_created_on>
+        <sys_id>30f34d4adbe07780ff2b52f4ce96196c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:23:25</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_68f34d4adbe07780ff2b52f4ce961941</table>
+        <value>{{action.populate_table}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>script</field>
+        <id>68f34d4adbe07780ff2b52f4ce961941</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:23:25</sys_created_on>
+        <sys_id>70f34d4adbe07780ff2b52f4ce96196b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:23:25</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+</record_update>

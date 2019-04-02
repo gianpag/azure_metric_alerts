@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_hub_action_instance">
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_type display_value="Get Azure Bearer">5d7ed715db74eb00ff2b52f4ce961981</action_type>
+        <action_type_parent display_value="Get Azure Bearer">1debcb1ddbf0eb00ff2b52f4ce96196f</action_type_parent>
+        <comment/>
+        <compiled_snapshot display_value="">1debcb1ddbf0eb00ff2b52f4ce96196f</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Azure_Create_v2_Alert_Rule">a6710986dbe07780ff2b52f4ce961941</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:12:37</sys_created_on>
+        <sys_id>2a710986dbe07780ff2b52f4ce96194a</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="GP_Azure_Flows" source="x_snc_gp_azure_flo">78110d06dbe07780ff2b52f4ce96198d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="GP_Azure_Flows">78110d06dbe07780ff2b52f4ce96198d</sys_scope>
+        <sys_update_name>sys_hub_action_instance_2a710986dbe07780ff2b52f4ce96194a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:12:37</sys_updated_on>
+        <ui_id>a0823415-89f3-4739-9131-8f199df489e9</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=2a710986dbe07780ff2b52f4ce96194a"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>2a710986dbe07780ff2b52f4ce96194a</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:12:38</sys_created_on>
+        <sys_id>36710986dbe07780ff2b52f4ce961953</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:12:38</sys_updated_on>
+        <value>BLC8MMD/7qHuH9NJ0IfGatRDN4OfNBHSLp8ogfWud58=</value>
+        <variable display_value="">597ed715db74eb00ff2b52f4ce961984</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>2a710986dbe07780ff2b52f4ce96194a</document_key>
+        <order>3</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:12:38</sys_created_on>
+        <sys_id>72710986dbe07780ff2b52f4ce961953</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:12:38</sys_updated_on>
+        <value>https://management.azure.com/</value>
+        <variable display_value="">157ed715db74eb00ff2b52f4ce9619b1</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>2a710986dbe07780ff2b52f4ce96194a</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:12:38</sys_created_on>
+        <sys_id>be710986dbe07780ff2b52f4ce961952</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:12:38</sys_updated_on>
+        <value>client_credentials</value>
+        <variable display_value="">9d7ed715db74eb00ff2b52f4ce9619aa</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>2a710986dbe07780ff2b52f4ce96194a</document_key>
+        <order>4</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:12:38</sys_created_on>
+        <sys_id>f6710986dbe07780ff2b52f4ce961952</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:12:38</sys_updated_on>
+        <value>8bcff170-9979-491e-8683-d8ced0850bad</value>
+        <variable display_value="">997ed715db74eb00ff2b52f4ce9619b7</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>2a710986dbe07780ff2b52f4ce96194a</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:12:38</sys_created_on>
+        <sys_id>f6710986dbe07780ff2b52f4ce961953</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:12:38</sys_updated_on>
+        <value>f5ce472f-77b2-4e20-94a3-f90dc953f04e</value>
+        <variable display_value="">197ed715db74eb00ff2b52f4ce9619a4</variable>
+    </sys_variable_value>
+</record_update>

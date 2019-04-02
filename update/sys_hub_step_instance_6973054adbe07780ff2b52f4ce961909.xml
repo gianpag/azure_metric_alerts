@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_hub_step_instance">
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Get Azure Alert Rules">e873c14adbe07780ff2b52f4ce961931</action>
+        <cid>636eb32b-5a1c-45e6-b975-aef8c0c2aec9</cid>
+        <extended_inputs/>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>populate Alert Definition Table</label>
+        <order>2</order>
+        <outputs/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_class_name>sys_hub_step_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:21:17</sys_created_on>
+        <sys_id>6973054adbe07780ff2b52f4ce961909</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>populate Alert Definition Table</sys_name>
+        <sys_package display_value="GP_Azure_Flows" source="x_snc_gp_azure_flo">78110d06dbe07780ff2b52f4ce96198d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="GP_Azure_Flows">78110d06dbe07780ff2b52f4ce96198d</sys_scope>
+        <sys_update_name>sys_hub_step_instance_6973054adbe07780ff2b52f4ce961909</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:21:19</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=6973054adbe07780ff2b52f4ce961909"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>6973054adbe07780ff2b52f4ce961909</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:21:19</sys_created_on>
+        <sys_id>8a73054adbe07780ff2b52f4ce96193c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:21:19</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+// ... code ...
+
+  alertDefinitions = JSON.parse(decodeURI(inputs.alertDefRespBody)).value;
+  var temp_test_list = []; //to remove
+
+  var id = '';
+  var alert_name = ''; // last element of the id "path"
+  var cmdb_object_id = ''; // only item in the properties.scopes list
+  var severity = '';
+  var enabled = '';
+  var description = '';
+
+  //"scopes": [
+  //"/subscriptions/48c3ee89-06d2-4f41-bedb-22603be48a43/resourceGroups/Showcase01/providers/Microsoft.Compute/virtualMachines/showcasemid05"
+  //]
+  var period = '';
+  var frequency = '';
+
+  // In the conditions list there can be one or 2 conditions
+  var cond_threshold1 = '';
+  var cond_name1 = '';
+  var metric_name1 = '';
+  var cond_operator1 = '';
+  var cond_aggregation1 = '';
+  //second condition
+  var cond_threshold2 = '';
+  var cond_name2 = '';
+  var metric_name2 = '';
+  var cond_operator2 = '';
+  var cond_aggregation2 = '';
+
+  //const regex = /.*\/(\S+)/g;
+  //var m_array = [];
+  var raeggex = new RegExp('.*\/(.*)');
+  
+  for (var i = 0, len = alertDefinitions.length; i &lt; len; ++i) {
+    id = alertDefinitions[i].id;
+    var m_array = id.match(raeggex);
+     if (m_array &amp;&amp; m_array[1]) {
+          gs.info("### INFO : " + m_array[1]);
+     } else {
+          gs.info("### No match");
+     }
+    //var  = regex.match(id);
+    
+    //gs.info(m_array);
+	alert_name = m_array[1];
+    
+    
+    cmdb_object_id = alertDefinitions[i].properties.scopes[0];
+    period = alertDefinitions[i].properties.windowSize;
+    frequency = alertDefinitions[i].properties.evaluationFrequency;
+    enabled = alertDefinitions[i].properties.enabled;
+    severity = alertDefinitions[i].properties.severity;
+
+    //get first condition
+    cond_name1 = alertDefinitions[i].properties.criteria.allOf[0].name;
+    metric_name1 = alertDefinitions[i].properties.criteria.allOf[0].metricName;
+    cond_operator1 = alertDefinitions[i].properties.criteria.allOf[0].operator;
+    cond_threshold1 = alertDefinitions[i].properties.criteria.allOf[0].threshold;
+    metric_namespace1 = alertDefinitions[i].properties.criteria.allOf[0].metricNamespace; //name space should be the same for a resource
+    cond_aggregation1  = alertDefinitions[i].properties.criteria.allOf[0].timeAggregation;
+    //get second condition if available
+    if (alertDefinitions[i].properties.criteria.allOf[1]) {
+      cond_name2 = alertDefinitions[i].properties.criteria.allOf[1].name;
+      metric_name2 = alertDefinitions[i].properties.criteria.allOf[1].metricName;
+      cond_operator2 = alertDefinitions[i].properties.criteria.allOf[1].operator;
+      cond_threshold2 = alertDefinitions[i].properties.criteria.allOf[1].threshold;
+      metric_namespace2 = alertDefinitions[i].properties.criteria.allOf[1].metricNamespace; //name space should be the same for both conditions at this stage but maybe in the future conditions on metrics of 2 different namespaces can be used
+      cond_aggregation2  = alertDefinitions[i].properties.criteria.allOf[1].timeAggregation;
+    }
+    
+    if (inputs.populate_table_switch){
+      var checkDup = new GlideRecord ( "x_snc_threshsetter_azure_ci_alert_rule" );
+      checkDup.addQuery('name',alert_name);
+      checkDup.addQuery('resource_group',inputs.resourceGroup);
+      checkDup.query();
+
+      if (!checkDup.hasNext()) {
+        var alertDef = new GlideRecord ( "x_snc_threshsetter_azure_ci_alert_rule" );
+        alertDef.initialize();
+        alertDef.alertrule_id = id;
+        alertDef.name = alert_name;
+  		  alertDef.resource_object_id = cmdb_object_id;
+        alertDef.severity = severity;
+        alertDef.active = enabled;
+        alertDef.description = description;
+        alertDef.period = period;
+        alertDef.frequency = frequency;
+        alertDef.threshold1 = cond_threshold1;
+        //alertDef. = cond_name1;
+        metric_record = new GlideRecord ( "x_snc_threshsetter_azure_alert_metric_def" );
+        metric_record.addQuery('name',metric_name1);
+        metric_record.addQuery('namespace',metric_namespace1);
+        metric_record.query();
+        if (metric_record.next()) {
+          alertDef.metric1 = metric_record.sys_id;
+        }
+        alertDef.operator1 = cond_operator1;
+        alertDef.aggregation1 = cond_aggregation1;
+        if (alertDefinitions[i].properties.criteria.allOf[1]) {
+          alertDef.threshold2 = cond_threshold2;
+          //alertDef. = cond_name2;
+          metric_record2 = new GlideRecord ( "x_snc_threshsetter_azure_alert_metric_def" );
+          metric_record2.addQuery('name',metric_name2);
+          metric_record2.addQuery('namespace',metric_namespace2);
+          metric_record2.query();
+          if (metric_record2.next()) {
+            alertDef.metric2 = metric_record2.sys_id;
+          }
+          alertDef.operator2 = cond_operator2;
+          alertDef.aggregation2 = cond_aggregation2;
+        }
+        
+        alertDef.insert();
+      }
+    }
+
+    temp_test_list.push(id + ' ' + cmdb_object_id + ' ' + period + ' ' + frequency + ' ' + enabled + ' ' + severity + ' ' + cond_name1 + ' ' + metric_name1 + ' ' + cond_operator1 + ' ' + cond_threshold1 + ' ' + cond_aggregation1 + ' ' + cond_name2 + ' ' + metric_name2 + ' ' + cond_operator2 + ' ' + cond_threshold2 + ' ' + cond_aggregation2 + ' **' + alert_name + '** ');
+  }
+  outputs.alertRules = JSON.stringify(alertDefinitions);
+  outputs.temp_test_list = JSON.stringify(temp_test_list);
+
+})(inputs, outputs);
+</value>
+        <variable display_value="">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>6973054adbe07780ff2b52f4ce961909</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:21:19</sys_created_on>
+        <sys_id>c673054adbe07780ff2b52f4ce96193c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:21:19</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=6973054adbe07780ff2b52f4ce961909"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>alertDefRespBody</field>
+        <id>6973054adbe07780ff2b52f4ce961909</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:21:19</sys_created_on>
+        <sys_id>c673054adbe07780ff2b52f4ce96193d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:21:19</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_6973054adbe07780ff2b52f4ce961909</table>
+        <value>{{step[ab1213ed-d243-4408-988f-a15549ae8f15].response_body}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>application</field>
+        <id>6973054adbe07780ff2b52f4ce961909</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:21:19</sys_created_on>
+        <sys_id>8273054adbe07780ff2b52f4ce96193c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:21:19</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>populate_table_switch</field>
+        <id>6973054adbe07780ff2b52f4ce961909</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:21:19</sys_created_on>
+        <sys_id>8a73054adbe07780ff2b52f4ce96193d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:21:19</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_6973054adbe07780ff2b52f4ce961909</table>
+        <value>{{action.populate_table}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>resourceGroup</field>
+        <id>6973054adbe07780ff2b52f4ce961909</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:21:19</sys_created_on>
+        <sys_id>0673054adbe07780ff2b52f4ce96193d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:21:19</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_6973054adbe07780ff2b52f4ce961909</table>
+        <value>{{action.resource_group_name}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>script</field>
+        <id>6973054adbe07780ff2b52f4ce961909</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:21:19</sys_created_on>
+        <sys_id>4673054adbe07780ff2b52f4ce96193c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:21:19</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+</record_update>

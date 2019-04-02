@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_hub_step_instance">
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Get Azure Bearer">0fd1cd86dbe07780ff2b52f4ce9619e3</action>
+        <cid>450ab0f6-9377-48e1-a6f9-1dcdde88ceb9</cid>
+        <extended_inputs/>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Script step</label>
+        <order>2</order>
+        <outputs/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_class_name>sys_hub_step_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:14:23</sys_created_on>
+        <sys_id>a4e101c6dbe07780ff2b52f4ce9619db</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Script step</sys_name>
+        <sys_package display_value="GP_Azure_Flows" source="x_snc_gp_azure_flo">78110d06dbe07780ff2b52f4ce96198d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="GP_Azure_Flows">78110d06dbe07780ff2b52f4ce96198d</sys_scope>
+        <sys_update_name>sys_hub_step_instance_a4e101c6dbe07780ff2b52f4ce9619db</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:14:24</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=a4e101c6dbe07780ff2b52f4ce9619db"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>a4e101c6dbe07780ff2b52f4ce9619db</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:14:24</sys_created_on>
+        <sys_id>28e141c6dbe07780ff2b52f4ce961901</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:14:24</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+	Resp_Body = JSON.parse(inputs.ResponseBody);
+  	outputs.AuthBearer=Resp_Body.access_token;
+})(inputs, outputs);
+</value>
+        <variable display_value="">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>a4e101c6dbe07780ff2b52f4ce9619db</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:14:24</sys_created_on>
+        <sys_id>64e141c6dbe07780ff2b52f4ce961901</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:14:24</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=a4e101c6dbe07780ff2b52f4ce9619db"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>application</field>
+        <id>a4e101c6dbe07780ff2b52f4ce9619db</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:14:24</sys_created_on>
+        <sys_id>20e141c6dbe07780ff2b52f4ce961901</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:14:24</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>ResponseBody</field>
+        <id>a4e101c6dbe07780ff2b52f4ce9619db</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:14:24</sys_created_on>
+        <sys_id>24e141c6dbe07780ff2b52f4ce961902</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:14:24</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_a4e101c6dbe07780ff2b52f4ce9619db</table>
+        <value>{{step[03899cf4-9624-45e4-9585-3c7cf3db011b].response_body}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>script</field>
+        <id>a4e101c6dbe07780ff2b52f4ce9619db</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:14:24</sys_created_on>
+        <sys_id>e0e141c6dbe07780ff2b52f4ce961901</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:14:24</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+</record_update>

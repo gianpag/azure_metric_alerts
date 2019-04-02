@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_hub_action_type_definition">
+    <sys_hub_action_type_definition action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <annotation/>
+        <category/>
+        <copied_from>8cda11d0dbc16b40ff2b52f4ce96195c</copied_from>
+        <copied_from_name>Get Azure Action Groups</copied_from_name>
+        <description/>
+        <internal_name>get_azure_action_groups</internal_name>
+        <label_cache>[{"name":"{{action.bearer}}","label":"action➛bearer","type":"action","ref":""},{"name":"{{action.subscription_id}}","label":"action➛subscription_id","type":"action","ref":""},{"name":"{{step[ab1213ed-d243-4408-988f-a15549ae8f15].response_body}}","label":"step➛get Action Groups➛Response Body","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].a}}","label":"step➛extract Action Group Name and Id➛a","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].temp_test_list}}","label":"stextract Action Group Name and Idp➛e➛temp_test_list","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].ac}}","label":"step➛extract Action Group Name and Id➛ac","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].act}}","label":"step➛extract Action Group Name and Id➛act","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].acti}}","label":"step➛extract Action Group Name and Id➛acti","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].actio}}","label":"step➛extract Action Group Name and Id➛actio","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].action}}","label":"step➛extract Action Group Name and Id➛action","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].actionG}}","label":"step➛extract Action Group Name and Id➛actionG","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].actionGr}}","label":"step➛extract Action Group Name and Id➛actionGr","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].actionGro}}","label":"step➛extract Action Group Name and Id➛actionGro","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].actionGrou}}","label":"step➛extract Action Group Name and Id➛actionGrou","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].actionGroup}}","label":"step➛extract Action Group Name and Id➛actionGroup","type":"step","ref":""},{"name":"{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].actionGroups}}","label":"step➛extract Action Group Name and Id➛actionGroups","type":"step","ref":""}]</label_cache>
+        <latest_snapshot/>
+        <master_snapshot/>
+        <name>Get Azure Action Groups</name>
+        <outputs/>
+        <outputs/>
+        <state>draft</state>
+        <sys_class_name>sys_hub_action_type_definition</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:19:00</sys_created_on>
+        <sys_id>80f2850adbe07780ff2b52f4ce9619c8</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Get Azure Action Groups</sys_name>
+        <sys_package display_value="GP_Azure_Flows" source="x_snc_gp_azure_flo">78110d06dbe07780ff2b52f4ce96198d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="GP_Azure_Flows">78110d06dbe07780ff2b52f4ce96198d</sys_scope>
+        <sys_update_name>sys_hub_action_type_definition_80f2850adbe07780ff2b52f4ce9619c8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:19:05</sys_updated_on>
+        <system_level>false</system_level>
+        <type/>
+    </sys_hub_action_type_definition>
+    <sys_translated_text action="delete_multiple" query="documentkey=80f2850adbe07780ff2b52f4ce9619c8"/>
+    <sys_variable_value action="delete_multiple" query="document_key=80f2850adbe07780ff2b52f4ce9619c8"/>
+    <sys_element_mapping action="delete_multiple" query="id=80f2850adbe07780ff2b52f4ce9619c8"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>alerts</field>
+        <id>80f2850adbe07780ff2b52f4ce9619c8</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:19:05</sys_created_on>
+        <sys_id>99f2090adbe07780ff2b52f4ce961905</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:19:05</sys_updated_on>
+        <table>var__m_sys_hub_action_output_80f2850adbe07780ff2b52f4ce9619c8</table>
+        <value>{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].actionGroups}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>temptest</field>
+        <id>80f2850adbe07780ff2b52f4ce9619c8</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-02 21:19:05</sys_created_on>
+        <sys_id>5df2090adbe07780ff2b52f4ce961905</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-02 21:19:05</sys_updated_on>
+        <table>var__m_sys_hub_action_output_80f2850adbe07780ff2b52f4ce9619c8</table>
+        <value>{{step[636eb32b-5a1c-45e6-b975-aef8c0c2aec9].temp_test_list}}</value>
+    </sys_element_mapping>
+</record_update>
